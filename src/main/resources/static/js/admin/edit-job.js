@@ -1,1 +1,44 @@
-const id=new URLSearchParams(location.search).get('id');if(!id)location.href='/admin/jobs.html';async function load(){const r=await fetch(`${BASE_URL}/track/${id}`);if(!r.ok){alert('Job not found');location.href='/admin/jobs.html';return;}const j=await r.json();for(const k of ['fileName','filePath','pages','copies','printType','status','paymentStatus'])document.getElementById(k).value=j[k]??'';}document.getElementById('updateForm').addEventListener('submit',async e=>{e.preventDefault();const j={fileName:fileName.value,filePath:filePath.value,pages:Number(pages.value),copies:Number(copies.value),printType:printType.value,status:status.value,paymentStatus:paymentStatus.value};const r=await fetch(`${BASE_URL}/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(j)});if(!r.ok){alert((await r.json()).message||'Unable to update');return;}location.href='/admin/jobs.html';});load();
+const id = new URLSearchParams(location.search).get("id");
+if (!id) location.href = "/admin/jobs.html";
+async function load() {
+  const r = await fetch(`${BASE_URL}/track/${id}`);
+  if (!r.ok) {
+    alert("Job not found");
+    location.href = "/admin/jobs.html";
+    return;
+  }
+  const j = await r.json();
+  for (const k of [
+    "fileName",
+    "filePath",
+    "pages",
+    "copies",
+    "printType",
+    "status",
+    "paymentStatus",
+  ])
+    document.getElementById(k).value = j[k] ?? "";
+}
+document.getElementById("updateForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const j = {
+    fileName: fileName.value,
+    filePath: filePath.value,
+    pages: Number(pages.value),
+    copies: Number(copies.value),
+    printType: printType.value,
+    status: status.value,
+    paymentStatus: paymentStatus.value,
+  };
+  const r = await fetch(`${BASE_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(j),
+  });
+  if (!r.ok) {
+    alert((await r.json()).message || "Unable to update");
+    return;
+  }
+  location.href = "/admin/jobs.html";
+});
+load();

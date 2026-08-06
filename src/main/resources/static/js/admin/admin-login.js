@@ -1,1 +1,29 @@
-window.addEventListener('DOMContentLoaded',()=>{const params=new URLSearchParams(location.search);const message=document.getElementById('message');if(params.has('error')){message.className='mb-3 text-center text-danger';message.textContent='Invalid username or password.';}if(params.has('logout')){message.className='mb-3 text-center text-success';message.textContent='Logged out successfully.';}document.getElementById('loginForm').addEventListener('submit',async event=>{event.preventDefault();const data=new URLSearchParams();data.append('username',document.getElementById('username').value.trim());data.append('password',document.getElementById('password').value);const response=await fetch('/login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString(),redirect:'follow'});location.href=response.redirected?response.url:'/admin/dashboard.html';});});
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(location.search);
+  const message = document.getElementById("message");
+  if (params.has("error")) {
+    message.className = "mb-3 text-center text-danger";
+    message.textContent = "Invalid username or password.";
+  }
+  if (params.has("logout")) {
+    message.className = "mb-3 text-center text-success";
+    message.textContent = "Logged out successfully.";
+  }
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new URLSearchParams();
+      data.append("username", document.getElementById("username").value.trim());
+      data.append("password", document.getElementById("password").value);
+      const response = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: data.toString(),
+        redirect: "follow",
+      });
+      location.href = response.redirected
+        ? response.url
+        : "/admin/dashboard.html";
+    });
+});
