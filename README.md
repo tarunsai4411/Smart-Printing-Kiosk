@@ -1,177 +1,217 @@
 # 🖨️ Smart Printing Kiosk
 
-<p align="center">
-
-![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.4-brightgreen?style=for-the-badge&logo=springboot)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-6-green?style=for-the-badge)
-![MySQL](https://img.shields.io/badge/MySQL-9-blue?style=for-the-badge&logo=mysql)
-![Hibernate](https://img.shields.io/badge/Hibernate-ORM-brown?style=for-the-badge)
-![Maven](https://img.shields.io/badge/Maven-Build-red?style=for-the-badge&logo=apachemaven)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-
-</p>
+A full-stack Java web application for managing document uploads, simulated payments, print queues, job tracking, and administrative print management.
 
 ---
 
-# 📌 Project Overview
+## 📌 Project Overview
 
-**Smart Printing Kiosk** is a **Full Stack Spring Boot Application** that allows customers to upload PDF documents through a QR code, simulate payment, receive a queue number, and track print status in real time.
+**Smart Printing Kiosk** is a full-stack application developed using **Java, Spring Boot, MySQL, HTML, CSS, Bootstrap, and JavaScript**.
 
-The system also provides an **Admin Dashboard** for monitoring print jobs, managing the queue, viewing analytics, and securely handling print requests.
+The application allows customers to upload PDF documents, select printing options, complete a simulated payment, receive a queue number, and track the status of their print job.
 
-This project demonstrates real-world concepts such as:
+Customers can also scan a **QR code** from the kiosk homepage to open the document upload page on their mobile device.
+
+An administrator can securely log in to monitor print jobs, manage the printing queue, view completed jobs, and check basic printing analytics.
+
+---
+
+## 🚀 Features
+
+### 👤 Customer Module
+
+- 📄 Upload PDF documents
+- 📑 Automatic PDF page counting
+- 🖨️ Select Black & White or Color printing
+- 🔢 Select number of copies
+- 💰 Automatic print cost calculation
+- 💳 Simulated payment
+- 🔢 Automatic queue number generation
+- 📍 Track print job using Job ID
+- 🔄 Automatic status refresh
+- 📱 QR code based mobile upload access
+
+### 👨‍💼 Admin Module
+
+- 🔐 Secure admin login
+- 📊 Admin dashboard
+- 📋 View print jobs
+- 🖨️ Monitor print queue
+- 📜 View print history
+- 🔍 Search print jobs
+- ↕️ Sort job information
+- 📈 View printing analytics
+- 📂 Preview uploaded PDF files
+- 🚪 Secure logout
+
+### ⚙️ Backend Features
 
 - Spring Boot REST APIs
-- Spring Security Authentication
-- Queue Management
-- File Upload
-- Scheduler
-- MySQL Database
-- JavaScript Frontend
-- MVC Architecture
-
----
-
-# 🚀 Features
-
-## 👤 Customer Module
-
-- 📄 Upload PDF Documents
-- 📑 Automatic PDF Page Counting
-- 🎨 Select Black & White / Color Printing
-- 💰 Automatic Price Calculation
-- 💳 Simulated Payment
-- 🧾 Digital Receipt
-- 🔢 Queue Number Generation
-- 📍 Real-Time Print Tracking
-- 📱 QR Code Based Access
-
----
-
-## 👨‍💼 Admin Module
-
-- 🔐 Secure Login
-- 📊 Dashboard
-- 📋 View All Print Jobs
-- 🖨 Queue Management
-- 📜 Print History
-- 🔍 Search Jobs
-- ↕ Sorting
-- 📄 Pagination
-- 📈 Analytics
-- 📂 PDF Preview
-
----
-
-## ⚙ Backend Features
-
-- Spring Boot REST APIs
-- Spring Security + BCrypt
-- MySQL Database
+- Spring Security authentication
+- BCrypt password encoding
 - Spring Data JPA
 - Hibernate ORM
-- Global Exception Handling
-- Scheduler
-- SLF4J Logging
-- Swagger Documentation
-- Automatic File Cleanup
+- MySQL database integration
+- PDF processing using Apache PDFBox
+- Automatic queue processing using scheduler
+- Global exception handling
+- Application logging
+- Swagger / OpenAPI documentation
+- File cleanup after completion or cancellation
 
 ---
 
-# 🏗️ System Architecture
+## 🔄 Application Workflow
 
-```
-                  CUSTOMER
-
-                     │
-                     ▼
-
-              Scan QR Code
-
-                     │
-                     ▼
-
-              Upload PDF File
-
-                     │
-                     ▼
-
-             Spring Boot Backend
-
-                     │
-
-       ┌─────────────┴─────────────┐
-
-       ▼                           ▼
-
-   MySQL Database             Upload Folder
-
-       │
-
-       ▼
-
-   Queue Scheduler
-
-       │
-
-       ▼
-
-  Admin Dashboard
-
-       │
-
-       ▼
-
-   Printer (Future)
+```text
+Customer
+   │
+   ▼
+Open Kiosk / Scan QR
+   │
+   ▼
+Upload PDF
+   │
+   ▼
+Select Print Options
+   │
+   ▼
+Calculate Amount
+   │
+   ▼
+Simulated Payment
+   │
+   ▼
+Queue Number Generated
+   │
+   ▼
+Print Job Created
+   │
+   ▼
+Track Job Status
+   │
+   ▼
+PENDING
+   │
+   ▼
+PRINTING
+   │
+   ▼
+COMPLETED
 ```
 
 ---
 
-# 📸 Screenshots
+## 🏗️ System Architecture
 
-Create a folder named:
-
+```text
+                    CUSTOMER
+                        │
+                        ▼
+               Web / QR Access
+                        │
+                        ▼
+               HTML / CSS / JS
+                        │
+                        ▼
+              Spring Boot Backend
+                        │
+          ┌─────────────┴─────────────┐
+          │                           │
+          ▼                           ▼
+     MySQL Database              Upload Folder
+          │
+          ▼
+     Queue Scheduler
+          │
+          ▼
+      Print Status
+          │
+          ▼
+     Admin Dashboard
 ```
-screenshots/
-```
 
-Add these screenshots:
+---
 
-```
-screenshots/
-│
-├── home.png
-├── upload.png
-├── payment.png
-├── tracking.png
-├── admin-login.png
-├── dashboard.png
-├── jobs.png
-├── queue.png
-├── history.png
-└── analytics.png
-```
+# 📸 Project Screenshots
 
-Then display them:
+## 1. Customer Home Page
 
-```markdown
-## Home
+The customer homepage provides access to document upload, job tracking, and QR-based mobile upload.
 
-![Home](screenshots/home.png)
+![Customer Home Page](screenshots/01-home.png)
 
-## Upload
+---
 
-![Upload](screenshots/upload.png)
+## 2. Document Upload
 
-## Dashboard
+Customers can upload PDF documents and select the required printing options.
 
-![Dashboard](screenshots/dashboard.png)
+![Document Upload](screenshots/02-upload.png)
 
-## Queue
+---
 
-![Queue](screenshots/queue.png)
-```
+## 3. Payment
+
+The application calculates the printing amount and provides a simulated payment step.
+
+![Payment](screenshots/03-payment.png)
+
+---
+
+## 4. Job Tracking
+
+Customers can enter their Job ID and view the queue number and current print status.
+
+![Job Tracking](screenshots/04-tracking.png)
+
+---
+
+## 5. Admin Login
+
+The administration section is protected using Spring Security authentication.
+
+![Admin Login](screenshots/05-admin-login.png)
+
+---
+
+## 6. Admin Dashboard
+
+The dashboard provides an overview of print jobs and kiosk activity.
+
+![Admin Dashboard](screenshots/06-dashboard.png)
+
+---
+
+## 7. Print Jobs
+
+Administrators can view and manage print job information.
+
+![Print Jobs](screenshots/07-jobs.png)
+
+---
+
+## 8. Print Queue
+
+The queue page displays jobs waiting for or currently undergoing processing.
+
+![Print Queue](screenshots/08-queue.png)
+
+---
+
+## 9. Print History
+
+Completed print jobs can be viewed from the history section.
+
+![Print History](screenshots/09-history.png)
+
+---
+
+## 10. Analytics
+
+The analytics page provides a visual overview of printing activity.
+
+![Analytics](screenshots/10-analytics.png)
 
 ---
 
@@ -196,152 +236,218 @@ Then display them:
 
 - MySQL
 
-### Tools
-
-- Maven
-- Git
-- GitHub
-- Swagger
-- VS Code
-- MySQL Workbench
-
 ### Libraries
 
 - Apache PDFBox
 - BCrypt Password Encoder
 - Chart.js
 
+### Development Tools
+
+- Maven
+- Git
+- GitHub
+- VS Code
+- MySQL Workbench
+- Swagger / OpenAPI
+
 ---
 
 # 📂 Project Structure
 
-```
-SmartPrintingKiosk
+```text
+SmartPrintingKiosk/
 │
 ├── database/
-│      setup.sql
+│   └── setup.sql
 │
 ├── screenshots/
+│   ├── 01-home.png
+│   ├── 02-upload.png
+│   ├── 03-payment.png
+│   ├── 04-tracking.png
+│   ├── 05-admin-login.png
+│   ├── 06-dashboard.png
+│   ├── 07-jobs.png
+│   ├── 08-queue.png
+│   ├── 09-history.png
+│   └── 10-analytics.png
 │
 ├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   ├── resources/
-│   │   │      application.properties
-│   │   │
-│   │   └── static/
-│   │          admin/
-│   │          customer/
-│   │          js/
-│   │          css/
-│   │          images/
-│
-├── uploads/
+│   └── main/
+│       │
+│       ├── java/
+│       │   └── com/tarun/PrintJobsSpring/
+│       │       ├── config/
+│       │       ├── controller/
+│       │       ├── dto/
+│       │       ├── entity/
+│       │       ├── exception/
+│       │       ├── repository/
+│       │       ├── scheduler/
+│       │       ├── security/
+│       │       └── service/
+│       │
+│       └── resources/
+│           ├── application.properties
+│           │
+│           └── static/
+│               ├── admin/
+│               ├── customer/
+│               ├── display/
+│               ├── css/
+│               ├── images/
+│               └── js/
 │
 ├── pom.xml
-│
 ├── README.md
-│
 └── .gitignore
 ```
 
+> Runtime folders such as `target/` and `uploads/` are excluded from Git using `.gitignore`.
+
 ---
 
-# 📡 REST APIs
+# 📡 REST API Overview
 
-## Customer APIs
+The Spring Boot backend exposes REST endpoints for customer and administrative operations.
+
+### Customer Operations
 
 | Method | Endpoint | Description |
-|---------|----------|-------------|
-| POST | /printjobs/upload | Upload PDF |
-| POST | /printjobs | Create Print Job |
-| GET | /printjobs/{id} | Track Print Job |
+|---|---|---|
+| POST | `/printjobs/upload` | Upload a PDF document |
+| POST | `/printjobs` | Create a print job |
+| GET | `/printjobs/track/{id}` | Track a print job |
+| GET | `/printjobs/current` | View current queue information |
 
----
+### Admin Operations
 
-## Admin APIs
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/printjobs` | View print jobs |
+| PUT | `/printjobs/{id}` | Update a print job |
+| PUT | `/printjobs/status/{id}` | Update print status |
+| DELETE | `/printjobs/{id}` | Delete a print job |
 
-| Method | Endpoint |
-|---------|----------|
-| GET | /printjobs |
-| PUT | /printjobs/status/{id} |
-| DELETE | /printjobs/{id} |
-| GET | /printjobs/history |
-| GET | /printjobs/page |
-| GET | /printjobs/sort |
+Additional endpoints are used by the dashboard, history, queue, and analytics pages.
 
 ---
 
 # 🗄️ Database
 
-Main Table
+The application uses a MySQL database named:
 
+```text
+print
 ```
+
+The main table is:
+
+```text
 print_jobs
 ```
 
-Columns
+Important fields include:
 
-- job_id
-- file_name
-- file_path
-- pages
-- copies
-- print_type
-- amount
-- status
-- payment_status
-- queue_number
+```text
+job_id
+file_name
+file_path
+pages
+copies
+print_type
+amount
+status
+payment_status
+queue_number
+created_at
+updated_at
+```
 
 ---
 
 # 🔐 Security
 
-- Spring Security
-- BCrypt Password Encryption
-- Session Management
-- Protected Admin Pages
-- Secure Login & Logout
+The administration module uses **Spring Security**.
+
+Security features include:
+
+- Admin authentication
+- BCrypt password encoding
+- Protected admin routes
+- Session-based authentication
+- Login and logout handling
+- Public customer pages
+- Protected administrative APIs
 
 ---
 
-# 🔄 Queue Workflow
+# 🖨️ Queue Processing
 
-```
-Upload PDF
-      │
-      ▼
+Paid print jobs are processed automatically by the application scheduler.
+
+```text
+Upload
+   │
+   ▼
 Payment
-      │
-      ▼
-Create Job
-      │
-      ▼
+   │
+   ▼
 PENDING
-      │
-      ▼
+   │
+   ▼
 Scheduler
-      │
-      ▼
+   │
+   ▼
 PRINTING
-      │
-      ▼
+   │
+   ▼
 COMPLETED
 ```
 
+The scheduler periodically checks eligible print jobs and updates their status.
+
 ---
 
-# ⚙️ Installation
+# 📱 QR Code Upload
 
-## Clone Repository
+The customer homepage generates a QR code dynamically.
+
+The QR destination is created using:
+
+```javascript
+window.location.origin + "/customer/upload.html"
+```
+
+This means the application does **not hardcode a specific computer IP address**.
+
+During local network testing, customers can scan the QR code while the phone and computer are connected to the same network.
+
+After cloud deployment, the same QR generation logic can automatically use the deployed application URL.
+
+---
+
+# ⚙️ Installation & Setup
+
+## Prerequisites
+
+Install:
+
+- Java 21
+- Maven
+- MySQL
+- Git
+
+---
+
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/tarunsai4411/Smart-Printing-Kiosk.git
 ```
 
----
-
-## Open Project
+Move into the project:
 
 ```bash
 cd Smart-Printing-Kiosk
@@ -349,87 +455,142 @@ cd Smart-Printing-Kiosk
 
 ---
 
-## Configure Database
+## 2. Configure MySQL
 
-Create MySQL Database
+Create the database if required:
 
 ```sql
 CREATE DATABASE print;
 ```
 
+The application can also be configured to create the database automatically through its JDBC configuration.
+
 ---
 
-## Environment Variables
+## 3. Configure Environment Variables
 
-```properties
-DB_USERNAME=root
-DB_PASSWORD=your_password
-APP_ADMIN_USERNAME=admin
-APP_ADMIN_PASSWORD=admin123
+Set your MySQL credentials locally.
+
+### macOS / Linux
+
+```bash
+export DB_USERNAME=root
+export DB_PASSWORD='your_mysql_password'
 ```
 
+Optional admin credentials:
+
+```bash
+export APP_ADMIN_USERNAME=admin
+export APP_ADMIN_PASSWORD=admin123
+```
+
+> Do not commit real database passwords or other secrets to GitHub.
+
 ---
 
-## Run
+## 4. Run the Application
 
 ```bash
 mvn clean spring-boot:run
 ```
 
+Wait until Spring Boot reports that Tomcat has started successfully.
+
 ---
 
-# 🌐 URLs
+# 🌐 Local Application URLs
 
-Customer
+After starting the application:
 
-```
+### Customer
+
+```text
 http://localhost:8080/customer/index.html
 ```
 
-Admin
+### Upload
 
+```text
+http://localhost:8080/customer/upload.html
 ```
+
+### Track Job
+
+```text
+http://localhost:8080/customer/track.html
+```
+
+### Admin Login
+
+```text
 http://localhost:8080/admin/admin-login.html
 ```
 
-Swagger
+### Display
 
+```text
+http://localhost:8080/display/index.html
 ```
+
+### Swagger
+
+```text
 http://localhost:8080/swagger-ui/index.html
 ```
 
 ---
 
-# 📊 Future Enhancements
+# 📱 Mobile Testing
 
-- ✅ Razorpay Integration
-- ✅ Stripe Integration
-- ✅ Email Notifications
-- ✅ SMS Notifications
-- ✅ Cloud Deployment
-- ✅ Multiple Printers
-- ✅ AI Print Optimization
-- ✅ Print Cost Estimation
-- ✅ User Accounts
+For QR-based mobile upload during local development:
+
+1. Connect the computer and phone to the same Wi-Fi network.
+2. Start the Spring Boot application.
+3. Find the computer's local network IP.
+4. Open the customer homepage using that local network address.
+5. Scan the generated QR code with the phone.
+6. Upload the PDF from the mobile device.
+
+The local IP address is used only at runtime and is not hardcoded into the project.
+
+---
+
+# 🔮 Future Enhancements
+
+Possible improvements include:
+
+- Real payment gateway integration using Razorpay or Stripe
+- Email notifications
+- SMS notifications
+- Cloud deployment
+- Cloud file storage
+- Multiple printer support
+- User accounts and login
+- Printer hardware integration
+- Print job priority management
+- Improved analytics
+- Docker deployment
 
 ---
 
 # 📖 Learning Outcomes
 
-This project demonstrates:
+Through this project, I gained practical experience with:
 
-- Spring Boot
-- Spring Security
-- REST APIs
-- JPA & Hibernate
-- MySQL
-- JavaScript
-- MVC Architecture
-- Scheduler
-- Authentication
-- File Upload
-- Exception Handling
-- Queue Management
+- Building REST APIs using Spring Boot
+- Connecting Java applications with MySQL
+- Spring Data JPA and Hibernate
+- Implementing Spring Security
+- Handling PDF file uploads
+- Processing PDF metadata
+- Creating frontend pages using HTML, CSS and Bootstrap
+- Connecting JavaScript with REST APIs
+- Managing application state and print queues
+- Implementing scheduled background processing
+- Handling application exceptions
+- Using Git and GitHub for version control
+- Testing applications across devices on a local network
 
 ---
 
@@ -437,30 +598,18 @@ This project demonstrates:
 
 ## M. Tarunsai
 
-🎓 B.Tech Graduate
+**B.Tech Graduate | Java Full Stack Developer**
 
-💻 Java Full Stack Developer
-
-📊 Data Analyst
-
-### GitHub
-
-https://github.com/tarunsai4411
-
-### LinkedIn
-
-(Add your LinkedIn profile)
+GitHub: `tarunsai4411`
 
 ---
 
-# ⭐ Support
+# ⭐ Project Purpose
 
-If you found this project useful,
-
-⭐ Star this repository on GitHub.
+This project was developed as a practical full-stack project to apply Java, Spring Boot, MySQL, REST API, frontend development, security, and queue-management concepts in a single application.
 
 ---
 
 # 📜 License
 
-This project is licensed under the MIT License.
+This project is intended for educational and portfolio purposes.
