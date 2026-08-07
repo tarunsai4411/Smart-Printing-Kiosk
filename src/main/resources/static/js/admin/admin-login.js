@@ -1,29 +1,135 @@
-window.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(location.search);
-  const message = document.getElementById("message");
-  if (params.has("error")) {
-    message.className = "mb-3 text-center text-danger";
-    message.textContent = "Invalid username or password.";
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form =
+      document.getElementById("loginForm");
+
+  const message =
+      document.getElementById("message");
+
+  const params =
+      new URLSearchParams(
+          window.location.search
+      );
+
+  if (params.get("error") === "true") {
+
+      message.className =
+          "text-danger text-center mb-3";
+
+      message.textContent =
+          "Invalid username or password.";
+
   }
-  if (params.has("logout")) {
-    message.className = "mb-3 text-center text-success";
-    message.textContent = "Logged out successfully.";
+
+  if (params.get("logout") === "true") {
+
+      message.className =
+          "text-success text-center mb-3";
+
+      message.textContent =
+          "Logged out successfully.";
+
   }
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const data = new URLSearchParams();
-      data.append("username", document.getElementById("username").value.trim());
-      data.append("password", document.getElementById("password").value);
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: data.toString(),
-        redirect: "follow",
-      });
-      location.href = response.redirected
-        ? response.url
-        : "/admin/dashboard.html";
-    });
+
+  form.addEventListener(
+      "submit",
+      async function (event) {
+
+          event.preventDefault();
+
+          const username =
+              document
+                  .getElementById("username")
+                  .value
+                  .trim();
+
+          const password =
+              document
+                  .getElementById("password")
+                  .value;
+
+          message.textContent = "";
+
+          if (!username || !password) {
+
+              message.className =
+                  "text-danger text-center mb-3";
+
+              message.textContent =
+                  "Please enter username and password.";
+
+              return;
+          }
+
+          const formData =
+              new URLSearchParams();
+
+          formData.append(
+              "username",
+              username
+          );
+
+          formData.append(
+              "password",
+              password
+          );
+
+          try {
+
+              const response =
+                  await fetch(
+                      "/login",
+                      {
+                          method: "POST",
+
+                          headers: {
+                              "Content-Type":
+                                  "application/x-www-form-urlencoded"
+                          },
+
+                          body:
+                              formData.toString()
+                      }
+                  );
+
+              if (response.redirected) {
+
+                  window.location.href =
+                      response.url;
+
+                  return;
+              }
+
+              if (response.ok) {
+
+                  window.location.href =
+                      "/admin/dashboard.html";
+
+                  return;
+              }
+
+              message.className =
+                  "text-danger text-center mb-3";
+
+              message.textContent =
+                  "Invalid username or password.";
+
+          } catch (error) {
+
+              console.error(
+                  "Login Error:",
+                  error
+              );
+
+              message.className =
+                  "text-danger text-center mb-3";
+
+              message.textContent =
+                  "Unable to connect to server.";
+
+          }
+
+      }
+  );
+
 });

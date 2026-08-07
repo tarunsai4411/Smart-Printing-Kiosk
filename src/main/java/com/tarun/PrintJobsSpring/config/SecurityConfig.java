@@ -30,7 +30,7 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
 
-                // Public pages and static resources
+                // Public pages
                 .requestMatchers(
                         "/",
                         "/index.html",
@@ -39,16 +39,18 @@ public class SecurityConfig {
                         "/css/**",
                         "/js/**",
                         "/images/**",
-                        "/favicon.ico"
+                        "/favicon.ico",
+                        "/error"
                 ).permitAll()
 
-                // Public customer APIs
+                // Public customer POST APIs
                 .requestMatchers(
                         HttpMethod.POST,
                         "/printjobs",
                         "/printjobs/upload"
                 ).permitAll()
 
+                // Public customer GET APIs
                 .requestMatchers(
                         HttpMethod.GET,
                         "/printjobs/track/**",
@@ -56,7 +58,7 @@ public class SecurityConfig {
                         "/printjobs/{id:[0-9]+}"
                 ).permitAll()
 
-                // Public login page
+                // Public admin login
                 .requestMatchers(
                         "/admin/admin-login.html",
                         "/login"
@@ -69,18 +71,27 @@ public class SecurityConfig {
                         "/v3/api-docs/**"
                 ).permitAll()
 
-                // Protected admin pages and APIs
+                // Protected admin pages
                 .requestMatchers(
-                        "/admin/**",
+                        "/admin/**"
+                ).hasRole("ADMIN")
+
+                // Protected print job APIs
+                .requestMatchers(
                         "/printjobs/**"
                 ).hasRole("ADMIN")
 
+                // IMPORTANT: this must always be LAST
                 .anyRequest().authenticated()
             )
 
             .formLogin(form -> form
-                .loginPage("/admin/admin-login.html")
-                .loginProcessingUrl("/login")
+                .loginPage(
+                        "/admin/admin-login.html"
+                )
+                .loginProcessingUrl(
+                        "/login"
+                )
                 .defaultSuccessUrl(
                         "/admin/dashboard.html",
                         true
@@ -92,7 +103,9 @@ public class SecurityConfig {
             )
 
             .logout(logout -> logout
-                .logoutUrl("/logout")
+                .logoutUrl(
+                        "/logout"
+                )
                 .logoutSuccessUrl(
                         "/admin/admin-login.html?logout=true"
                 )
